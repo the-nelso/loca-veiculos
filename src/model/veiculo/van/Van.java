@@ -17,16 +17,20 @@ public class Van extends Veiculo{
 
 	@Override
 	public double getValorDiariaLocacao() {
-		if(this.categoria.equals(categoria.POPULAR)) {
+		if(this.categoria.equals(Categoria.POPULAR)) {
 			return 200.00;
 		}
-		if(this.categoria.equals(categoria.INTERMEDIARIO)) {
+		if(this.categoria.equals(Categoria.INTERMEDIARIO)) {
 			return 400.00;
 		}
-		if(this.categoria.equals(categoria.LUXO)) {
+		if(this.categoria.equals(Categoria.LUXO)) {
 			return 600.00;
 		}
 		return 0;
+	}
+
+	public ModeloVan getModeloVan() {
+		return modeloVan;
 	}
 	
 }

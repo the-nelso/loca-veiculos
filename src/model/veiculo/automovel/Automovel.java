@@ -8,7 +8,7 @@ import model.veiculo.estado.Estado;
 import model.veiculo.marca.Marca;
 
 public class Automovel extends Veiculo{
-	ModeloAutomovel modeloAutomovel;
+	private ModeloAutomovel modeloAutomovel;
 
 	public Automovel(Estado estado, Marca marca, Locacao locacao, Categoria categoria, double valorCompra, String placa, int ano, ModeloAutomovel modeloAutomovel) {
 		super(estado, marca, locacao, categoria, valorCompra, placa, ano);
@@ -21,13 +21,13 @@ public class Automovel extends Veiculo{
 
 	@Override
 	public double getValorDiariaLocacao() {
-		if(this.categoria.equals(categoria.POPULAR)) {
+		if(this.categoria.equals(Categoria.POPULAR)) {
 			return 100.00;
 		}
-		if(this.categoria.equals(categoria.INTERMEDIARIO)) {
+		if(this.categoria.equals(Categoria.INTERMEDIARIO)) {
 			return 300.00;
 		}
-		if(this.categoria.equals(categoria.LUXO)) {
+		if(this.categoria.equals(Categoria.LUXO)) {
 			return 450.00;
 		}
 		
