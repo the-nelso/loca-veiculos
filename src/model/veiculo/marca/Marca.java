@@ -1,3 +1,6 @@
 package model.veiculo.marca;
 
-public enum Marca {VW, GM, FIAT, HONDA, MERCEDES, ETC}
+public enum Marca {
+	FIAT, VOLKSWAGEM, HONDA, HYUNDAI, MERCEDES, YAMAHA, VOLVO
+}
+

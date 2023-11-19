@@ -35,4 +35,13 @@ public class Motocicleta extends Veiculo{
 		return modeloMotocicleta;
 	}
 	
+	@Override
+	public String getModelo() {
+		return modeloMotocicleta.name();
+	}
+	
+	@Override
+	public String getTipo() {
+		return "Motocicleta";
+	}
 }

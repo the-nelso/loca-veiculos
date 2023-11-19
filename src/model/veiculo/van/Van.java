@@ -32,5 +32,14 @@ public class Van extends Veiculo{
 	public ModeloVan getModeloVan() {
 		return modeloVan;
 	}
+
+	@Override
+	public String getModelo() {
+		return modeloVan.name();
+	}
 	
+	@Override
+	public String getTipo() {
+		return "Van";
+	}
 }

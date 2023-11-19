@@ -33,4 +33,14 @@ public class Automovel extends Veiculo{
 		
 		return 0;
 	}
+	
+	@Override
+	public String getModelo() {
+		return modeloAutomovel.name();
+	}
+	
+	@Override
+	public String getTipo() {
+		return "Automovel";
+	}
 }

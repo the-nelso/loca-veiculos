@@ -7,34 +7,53 @@ public class Cliente {
 	private String sobrenome;
 	private String endereco;
 	
-	public String getCpf() {
-		return cpf;
-	}
-	public void setCpf(String cpf) {
+	public Cliente(String cpf, String rg, String nome, String sobrenome, String endereco) {
 		this.cpf = cpf;
-	}
-	public String getRg() {
-		return rg;
-	}
-	public void setRg(String rg) {
 		this.rg = rg;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
 		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.endereco = endereco;
 	}
+
 	public String getSobrenome() {
 		return sobrenome;
 	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-	public String getEndereco() {
-		return endereco;
-	}
+
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+	
+	
 }

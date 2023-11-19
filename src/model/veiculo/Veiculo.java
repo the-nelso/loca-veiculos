@@ -29,7 +29,7 @@ public abstract class Veiculo implements VeiculoI{
 	
 	@Override
 	public void locar(int dias, Calendar data, Cliente cliente) {
-		Locacao locacao = new Locacao(dias, getValorDiariaLocacao(), data, cliente);
+		Locacao locacao = new Locacao(dias, getValorDiariaLocacao(), data, cliente, this);
 		this.estado = Estado.LOCADO;
 		this.locacao = locacao;
 	}
@@ -41,6 +41,10 @@ public abstract class Veiculo implements VeiculoI{
 	}
 	
 	public abstract double getValorDiariaLocacao();
+	
+	public abstract String getModelo();
+	
+	public abstract String getTipo();
 	
 	@Override
 	public void vender() {
