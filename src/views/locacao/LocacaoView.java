@@ -121,11 +121,11 @@ public class LocacaoView extends JFrame {
                     veiculoSelecionado.locar(numeroDias, calendar, clienteSelecionado);
                     updateTable();
         		}catch(Exception e) {
-        			JOptionPane.showMessageDialog(this, "Não foi encontrado um cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
+        			JOptionPane.showMessageDialog(this, "Preencha os campos de cliente e numero de dias.", "Erro", JOptionPane.ERROR_MESSAGE);
         		}
         		
         	}else {
-        		JOptionPane.showMessageDialog(this, "Preencha os campos de cliente e numero de dias.", "Erro", JOptionPane.ERROR_MESSAGE);
+        		JOptionPane.showMessageDialog(this, "Não foi encontrado um cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
         	}
             
         } else {
@@ -140,11 +140,11 @@ public class LocacaoView extends JFrame {
             String nomeCliente = cliente.getNome().toLowerCase();
             String cpfCliente = cliente.getCpf().toLowerCase();
             String sobrenomeCliente = cliente.getSobrenome().toLowerCase();
-            if (nomeCliente.contains(campoFiltrado)) {
+            if (nomeCliente.equalsIgnoreCase(campoFiltrado)) {
                 return cliente;
-            } else if(cpfCliente.contains(campoFiltrado)) {
+            } else if(cpfCliente.equalsIgnoreCase(campoFiltrado)) {
             	return cliente;
-            } else if(sobrenomeCliente.contains(campoFiltrado)) {
+            } else if(sobrenomeCliente.equalsIgnoreCase(campoFiltrado)) {
             	return cliente;
             }
         }

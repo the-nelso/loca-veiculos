@@ -7,7 +7,9 @@ import control.Dados;
 import java.util.List;
 
 import model.cliente.Cliente;
+import model.locacao.Locacao;
 import model.table.ClienteTableModel;
+import model.veiculo.estado.Estado;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,6 +26,7 @@ public class ClienteView extends JFrame {
     private JTextField enderecoField;
     
     private List<Cliente> listaClientes;
+    private List<Locacao> listaLocacao;
 
     public ClienteView() {
         super("Cadastro de Clientes");
@@ -43,6 +46,7 @@ public class ClienteView extends JFrame {
         listaClientes = Dados.getClientes();
         
         listaClientes = Dados.getClientes();
+        listaLocacao = Dados.getLocacoes();
         tableModel.setClientes(listaClientes);
 
         JButton addButton = new JButton("Adicionar");
@@ -127,7 +131,14 @@ public class ClienteView extends JFrame {
 
     private void excluirCliente(int selectedRow) {
         if (selectedRow != -1) {
-        	listaClientes.remove(selectedRow);
+        	Cliente clienteRemovido = tableModel.getClienteAt(selectedRow);
+        	for(Locacao locacao : listaLocacao) {
+        		if(locacao.getCliente().equals(clienteRemovido) && locacao.getVeiculo().getEstado() == Estado.LOCADO) {
+        			JOptionPane.showMessageDialog(this, "O Cliente não pode ser removido pois possui pelo menos uma locação.", "Erro", JOptionPane.ERROR_MESSAGE);
+        			return;
+        		}
+        	}
+        	listaClientes.remove(clienteRemovido);
 
             tableModel.setClientes(listaClientes);
             tableModel.fireTableDataChanged();
