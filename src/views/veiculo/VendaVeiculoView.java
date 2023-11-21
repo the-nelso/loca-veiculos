@@ -31,7 +31,7 @@ public class VendaVeiculoView extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        tipoVeiculoComboBox = new JComboBox<>(new String[]{"Automóvel", "Van", "Motocicleta"});
+        tipoVeiculoComboBox = new JComboBox<>(new String[]{"Automovel", "Van", "Motocicleta"});
         marcaComboBox = new JComboBox<>(Marca.values());
         categoriaComboBox = new JComboBox<>(new String[]{"POPULAR", "INTERMEDIARIO", "LUXO"});
         veiculosTable = new JTable();
@@ -56,6 +56,30 @@ public class VendaVeiculoView extends JFrame {
                 venderVeiculo();
             }
         });
+        
+        tipoVeiculoComboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				updateTable();
+			}
+		});
+        
+        marcaComboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				updateTable();
+			}
+		});
+        
+        categoriaComboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				updateTable();
+			}
+		});
 
         add(venderVeiculoButton, BorderLayout.SOUTH);
 
