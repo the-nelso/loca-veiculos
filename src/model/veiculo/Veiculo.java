@@ -1,6 +1,6 @@
 package model.veiculo;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import model.cliente.Cliente;
 import model.locacao.Locacao;
@@ -32,7 +32,7 @@ public abstract class Veiculo implements VeiculoI{
 	}
 	
 	@Override
-	public void locar(Long id, int dias, Calendar data, Cliente cliente) {
+	public void locar(Long id, int dias, LocalDate data, Cliente cliente) {
 		Locacao locacao = new Locacao(id, dias, getValorDiariaLocacao(), data, cliente, this);
 		this.estado = Estado.LOCADO;
 		this.locacao = locacao;
@@ -129,6 +129,5 @@ public abstract class Veiculo implements VeiculoI{
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
-	
 	
 }

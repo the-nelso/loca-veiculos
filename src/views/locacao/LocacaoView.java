@@ -1,8 +1,29 @@
 package views.locacao;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import controller.Dados;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import controller.cliente.ClienteController;
+import controller.locacao.LocacaoController;
+import controller.veiculo.VeiculoController;
 import model.cliente.Cliente;
 import model.locacao.Locacao;
 import model.table.VeiculoTableModel;
@@ -10,16 +31,12 @@ import model.veiculo.Veiculo;
 import model.veiculo.estado.Estado;
 import model.veiculo.marca.Marca;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class LocacaoView extends JFrame {
-    private JTextField filtroClienteField;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JTextField filtroClienteField;
     private JComboBox<String> tipoVeiculoComboBox;
     private JComboBox<Marca> marcaComboBox;
     private JComboBox<String> categoriaComboBox;
@@ -27,11 +44,19 @@ public class LocacaoView extends JFrame {
     private JTable veiculosTable;
     private VeiculoTableModel veiculoTableModel;
 
-    private List<Veiculo> listaVeiculos;
+	private List<Veiculo> listaVeiculos;
     private List<Cliente> listaClientes;
     private List<Locacao> listaLocacoes;
     
-    public LocacaoView() {
+    private LocacaoController locacaoController;
+    private ClienteController clienteController;
+    private VeiculoController veiculoController;
+    
+    public LocacaoView(LocacaoController locacaoController, ClienteController clienteController, VeiculoController veiculoController) {
+        this.locacaoController = locacaoController;
+        this.clienteController = clienteController;
+        this.veiculoController = veiculoController;
+
         setTitle("Locação de Veículos");
         setSize(1000, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -72,28 +97,25 @@ public class LocacaoView extends JFrame {
         });
         
         tipoVeiculoComboBox.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				updateTable();
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTable();
+            }
+        });
         
         marcaComboBox.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				updateTable();
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTable();
+            }
+        });
         
         categoriaComboBox.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				updateTable();
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTable();
+            }
+        });
         
         add(locarButton, BorderLayout.SOUTH);
 
@@ -105,28 +127,27 @@ public class LocacaoView extends JFrame {
     private void locarVeiculo() {
         int selectedRow = veiculosTable.getSelectedRow();
         LocalDate currentDate = LocalDate.now();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(currentDate.getYear(), currentDate.getMonthValue() - 1, currentDate.getDayOfMonth());
         Cliente clienteSelecionado = getClienteSelecionado();
         
+        
         if (selectedRow >= 0) {
-        	if(filtroClienteField.getText() != null && numeroDiasField.getText() != null && clienteSelecionado != null) {
-        		try {
-        			Veiculo veiculoSelecionado = listaVeiculos.get(selectedRow);
+            if(filtroClienteField.getText() != null && numeroDiasField.getText() != null && clienteSelecionado != null) {
+                try {
+                    Veiculo veiculoSelecionado = listaVeiculos.get(selectedRow);
                     
                     int numeroDias = Integer.parseInt(numeroDiasField.getText());
-                    Locacao locacao = new Locacao(null, numeroDias, numeroDias*veiculoSelecionado.getValorDiariaLocacao(), calendar, clienteSelecionado, veiculoSelecionado);
-                    listaLocacoes.add(locacao);
-                    veiculoSelecionado.locar(null, numeroDias, calendar, clienteSelecionado);
+                    Locacao locacao = new Locacao(null, numeroDias, numeroDias * veiculoSelecionado.getValorDiariaLocacao(), currentDate, clienteSelecionado, veiculoSelecionado);
+                    locacaoController.adicionarLocacao(locacao);
+                    veiculoSelecionado.locar(locacao.getId(), numeroDias, currentDate, clienteSelecionado);
+                    veiculoController.atualizarVeiculo(veiculoSelecionado);
                     updateTable();
-        		}catch(Exception e) {
-        			JOptionPane.showMessageDialog(this, "Preencha os campos de cliente e numero de dias.", "Erro", JOptionPane.ERROR_MESSAGE);
-        		}
-        		
-        	}else {
-        		JOptionPane.showMessageDialog(this, "Não foi encontrado um cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
-        	}
+                } catch(Exception e) {
+                    JOptionPane.showMessageDialog(this, "Preencha os campos de cliente e número de dias.", "Erro", JOptionPane.ERROR_MESSAGE);
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(this, "Não foi encontrado um cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
             
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um veículo para locar.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -136,27 +157,24 @@ public class LocacaoView extends JFrame {
     private Cliente getClienteSelecionado() {
         String campoFiltrado = filtroClienteField.getText().trim().toLowerCase();
 
-        for (Cliente cliente : listaClientes) {
+        List<Cliente> clientes = clienteController.obterListaClientes();
+
+        for (Cliente cliente : clientes) {
             String nomeCliente = cliente.getNome().toLowerCase();
             String cpfCliente = cliente.getCpf().toLowerCase();
             String sobrenomeCliente = cliente.getSobrenome().toLowerCase();
-            if (nomeCliente.equalsIgnoreCase(campoFiltrado)) {
+            if (nomeCliente.equalsIgnoreCase(campoFiltrado) || cpfCliente.equalsIgnoreCase(campoFiltrado) || sobrenomeCliente.equalsIgnoreCase(campoFiltrado)) {
                 return cliente;
-            } else if(cpfCliente.equalsIgnoreCase(campoFiltrado)) {
-            	return cliente;
-            } else if(sobrenomeCliente.equalsIgnoreCase(campoFiltrado)) {
-            	return cliente;
             }
         }
 
         return null;
     }
 
-
     private void updateTable() {
-    	listaVeiculos = Dados.getVeiculos();
-        listaClientes = Dados.getClientes();
-        listaLocacoes = Dados.getLocacoes();
+        this.listaVeiculos = veiculoController.listarVeiculosDisponiveis();
+        this.listaLocacoes = locacaoController.listarLocacoes();
+        this.listaClientes = clienteController.obterListaClientes();
 
         String categoriaSelecionada = categoriaComboBox.getSelectedItem().toString();
         String marcaSelecionada = marcaComboBox.getSelectedItem().toString();
@@ -169,19 +187,7 @@ public class LocacaoView extends JFrame {
                 .filter(veiculo -> tipoSelecionado.isEmpty() || veiculo.getTipo().equals(tipoSelecionado))
                 .collect(Collectors.toList());
 
-        
-
         veiculoTableModel.setVeiculos(veiculosDisponiveis);
         veiculosTable.setModel(veiculoTableModel);
     }
-    
-    public static void main(String [] args) {
-    	SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LocacaoView();
-            }
-        });
-    }
 }
-

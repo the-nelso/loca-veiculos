@@ -2,9 +2,11 @@ package model.veiculo.van;
 
 import model.locacao.Locacao;
 import model.veiculo.Veiculo;
+import model.veiculo.automovel.modelo.ModeloAutomovel;
 import model.veiculo.categoria.Categoria;
 import model.veiculo.estado.Estado;
 import model.veiculo.marca.Marca;
+import model.veiculo.motocicleta.modelo.ModeloMotocicleta;
 import model.veiculo.van.modelo.ModeloVan;
 
 public class Van extends Veiculo{
@@ -48,6 +50,18 @@ public class Van extends Veiculo{
 
 	public void setModeloVan(ModeloVan modeloVan) {
 		this.modeloVan = modeloVan;
+	}
+
+	@Override
+	public ModeloAutomovel getModeloAutomovel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ModeloMotocicleta getModeloMotocicleta() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

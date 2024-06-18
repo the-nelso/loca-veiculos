@@ -6,6 +6,8 @@ import model.veiculo.automovel.modelo.ModeloAutomovel;
 import model.veiculo.categoria.Categoria;
 import model.veiculo.estado.Estado;
 import model.veiculo.marca.Marca;
+import model.veiculo.motocicleta.modelo.ModeloMotocicleta;
+import model.veiculo.van.modelo.ModeloVan;
 
 public class Automovel extends Veiculo{
 	private ModeloAutomovel modeloAutomovel;
@@ -19,6 +21,7 @@ public class Automovel extends Veiculo{
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
 	public ModeloAutomovel getModeloAutomovel() {
 		return modeloAutomovel;
 	}
@@ -50,5 +53,15 @@ public class Automovel extends Veiculo{
 
 	public void setModeloAutomovel(ModeloAutomovel modeloAutomovel) {
 		this.modeloAutomovel = modeloAutomovel;
+	}
+
+	@Override
+	public ModeloVan getModeloVan() {
+		return null;
+	}
+
+	@Override
+	public ModeloMotocicleta getModeloMotocicleta() {
+		return null;
 	}
 }

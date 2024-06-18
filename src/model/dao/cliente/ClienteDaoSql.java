@@ -12,7 +12,7 @@ import model.dao.ConnectionFactory;
 
 public class ClienteDaoSql implements ClienteDao {
 	private ConnectionFactory connectionFactory;
-	private final String insert = "insert into Cliente (cpf,rg,nome,sobrenome,endereco) values (?,?,?,?,?,?)";
+	private final String insert = "insert into Cliente (cpf,rg,nome,sobrenome,endereco) values (?,?,?,?,?)";
 	private final String select = "select * from Cliente";
 	private final String update = "update Cliente set cpf=?, rg=?, nome=?, sobrenome=?, endereco=? WHERE id=?";
 	private final String delete = "delete from Cliente WHERE id=?";

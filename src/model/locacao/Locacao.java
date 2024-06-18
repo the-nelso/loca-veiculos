@@ -1,6 +1,7 @@
 package model.locacao;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.util.Date;
 
 import model.cliente.Cliente;
 import model.veiculo.Veiculo;
@@ -9,11 +10,11 @@ public class Locacao {
 	private Long id;
 	private int dias;
 	private double valor;
-	private Calendar data;
+	private LocalDate data;
 	private Cliente cliente;
 	private Veiculo veiculo;
 	
-	public Locacao(Long id, int dias, double valor, Calendar data, Cliente cliente, Veiculo veiculo) {
+	public Locacao(Long id, int dias, double valor, LocalDate data, Cliente cliente, Veiculo veiculo) {
 		this.cliente = cliente;
 		this.id = id;
 		this.dias = dias;
@@ -27,7 +28,7 @@ public class Locacao {
 	}
 
 
-	public Calendar getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
@@ -60,7 +61,7 @@ public class Locacao {
 		this.valor = valor;
 	}
 
-	public void setData(Calendar data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 

@@ -30,6 +30,26 @@ public class VeiculoController {
 			return null;
 		}
 	}
+	
+	public List<Veiculo> listarVeiculosLocados() {
+		try {
+			return veiculoDao.getAll();
+		} catch (Exception e) {
+			// Tratar exceção adequadamente
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<Veiculo> listarVeiculosDisponiveis() {
+		try {
+			return veiculoDao.getAll();
+		} catch (Exception e) {
+			// Tratar exceção adequadamente
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	public Veiculo buscarVeiculoPorId(Long id) {
 		try {

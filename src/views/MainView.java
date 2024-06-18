@@ -12,10 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import controller.LocacaoController;
 import controller.cliente.ClienteController;
+import controller.locacao.LocacaoController;
 import controller.veiculo.VeiculoController;
 import views.cliente.ClienteView;
+import views.locacao.LocacaoView;
 import views.veiculo.VeiculoView;
 
 public class MainView {
@@ -74,7 +75,7 @@ public class MainView {
         openLocacaoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // new LocacaoView(locacaoController);
+                new LocacaoView(locacaoController, clienteController, veiculoController);
             }
         });
 
