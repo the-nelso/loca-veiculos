@@ -2,7 +2,7 @@ package views.locacao;
 
 import javax.swing.*;
 
-import control.Dados;
+import controller.Dados;
 import model.cliente.Cliente;
 import model.locacao.Locacao;
 import model.table.VeiculoTableModel;
@@ -116,9 +116,9 @@ public class LocacaoView extends JFrame {
         			Veiculo veiculoSelecionado = listaVeiculos.get(selectedRow);
                     
                     int numeroDias = Integer.parseInt(numeroDiasField.getText());
-                    Locacao locacao = new Locacao(numeroDias, numeroDias*veiculoSelecionado.getValorDiariaLocacao(), calendar, clienteSelecionado, veiculoSelecionado);
+                    Locacao locacao = new Locacao(null, numeroDias, numeroDias*veiculoSelecionado.getValorDiariaLocacao(), calendar, clienteSelecionado, veiculoSelecionado);
                     listaLocacoes.add(locacao);
-                    veiculoSelecionado.locar(numeroDias, calendar, clienteSelecionado);
+                    veiculoSelecionado.locar(null, numeroDias, calendar, clienteSelecionado);
                     updateTable();
         		}catch(Exception e) {
         			JOptionPane.showMessageDialog(this, "Preencha os campos de cliente e numero de dias.", "Erro", JOptionPane.ERROR_MESSAGE);

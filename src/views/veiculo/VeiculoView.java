@@ -1,9 +1,23 @@
 package views.veiculo;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
 
-import control.Dados;
+import controller.Dados;
+import controller.veiculo.VeiculoController;
 import model.veiculo.Veiculo;
 import model.veiculo.automovel.Automovel;
 import model.veiculo.automovel.modelo.ModeloAutomovel;
@@ -15,14 +29,12 @@ import model.veiculo.motocicleta.modelo.ModeloMotocicleta;
 import model.veiculo.van.Van;
 import model.veiculo.van.modelo.ModeloVan;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
 public class VeiculoView extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1250027968214508596L;
 	private JComboBox<String> tipoComboBox;
     private JComboBox<Marca> marcaComboBox;
     private JComboBox<Estado> estadoComboBox;
@@ -31,9 +43,12 @@ public class VeiculoView extends JFrame {
     private JFormattedTextField valorDeCompraField;
     private JFormattedTextField placaField;
     private List<Veiculo> listaVeiculos;
+    private VeiculoController controller;
 
-    public VeiculoView() {
+    public VeiculoView(VeiculoController controller) {
         super("Cadastro de Veículos");
+        this.controller = controller;
+        
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
@@ -131,6 +146,7 @@ public class VeiculoView extends JFrame {
 
         if (veiculo != null) {
         	listaVeiculos.add(veiculo);
+        	controller.adicionarVeiculo(veiculo);
             limparCampos();
         } else {
             JOptionPane.showMessageDialog(this, "Erro ao criar veículo", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -167,14 +183,5 @@ public class VeiculoView extends JFrame {
         modeloComboBox.setSelectedIndex(0);
         valorDeCompraField.setValue(null);
         placaField.setValue(null);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VeiculoView();
-            }
-        });
     }
 }

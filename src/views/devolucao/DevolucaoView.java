@@ -2,7 +2,7 @@ package views.devolucao;
 
 import javax.swing.*;
 
-import control.Dados;
+import controller.Dados;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

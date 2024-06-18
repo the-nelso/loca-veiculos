@@ -15,6 +15,9 @@ public class Motocicleta extends Veiculo{
 		this.modeloMotocicleta = modeloMotocicleta;
 	}
 
+	public Motocicleta() {
+	}
+
 	@Override
 	public double getValorDiariaLocacao() {
 		if(this.categoria.equals(Categoria.POPULAR)) {
@@ -44,4 +47,10 @@ public class Motocicleta extends Veiculo{
 	public String getTipo() {
 		return "Motocicleta";
 	}
+
+	public void setModeloMotocicleta(ModeloMotocicleta modeloMotocicleta) {
+		this.modeloMotocicleta = modeloMotocicleta;
+	}
+	
+	
 }

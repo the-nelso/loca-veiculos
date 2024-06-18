@@ -14,7 +14,11 @@ public class Automovel extends Veiculo{
 		super(estado, marca, locacao, categoria, valorCompra, placa, ano);
 		this.modeloAutomovel = modeloAutomovel;
 	}
-	
+
+	public Automovel() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public ModeloAutomovel getModeloAutomovel() {
 		return modeloAutomovel;
 	}
@@ -42,5 +46,9 @@ public class Automovel extends Veiculo{
 	@Override
 	public String getTipo() {
 		return "Automovel";
+	}
+
+	public void setModeloAutomovel(ModeloAutomovel modeloAutomovel) {
+		this.modeloAutomovel = modeloAutomovel;
 	}
 }

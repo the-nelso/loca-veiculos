@@ -1,15 +1,22 @@
 package views;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+import controller.LocacaoController;
+import controller.cliente.ClienteController;
+import controller.veiculo.VeiculoController;
 import views.cliente.ClienteView;
-import views.devolucao.DevolucaoView;
-import views.locacao.LocacaoView;
 import views.veiculo.VeiculoView;
-import views.veiculo.VendaVeiculoView;
 
 public class MainView {
     public static void main(String[] args) {
@@ -22,45 +29,52 @@ public class MainView {
     }
 
     private static void createAndShowGUI() {
-        JFrame frame = new JFrame("Locação de Veiculos");
+        JFrame frame = new JFrame("Locação de Veículos");
         JButton openLocacaoButton = new JButton("Abrir Locação");
         JButton openClienteButton = new JButton("Abrir Clientes");
         JButton openVeiculoButton = new JButton("Abrir Veículos");
         JButton openDevolucaoButton = new JButton("Devolver Veículos");
         JButton openVenderButton = new JButton("Vender Veículos");
-        
+
+        // Criação dos controladores
+        ClienteController clienteController = new ClienteController();
+        LocacaoController locacaoController = new LocacaoController();
+        VeiculoController veiculoController = new VeiculoController();
+        // DevolucaoController devolucaoController = new DevolucaoController();
+        // VendaVeiculoController vendaVeiculoController = new VendaVeiculoController();
+
         openVenderButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new VendaVeiculoView();
-			}
-		});
-        
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // new VendaVeiculoView(vendaVeiculoController);
+            }
+        });
+
         openDevolucaoButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new DevolucaoView();
-			}
-		});
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // new DevolucaoView(devolucaoController);
+            }
+        });
 
         openVeiculoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new VeiculoView();
+                new VeiculoView(veiculoController);
             }
         });
 
         openClienteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new ClienteView();
+                new ClienteView(clienteController);
             }
         });
 
         openLocacaoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new LocacaoView();
+                // new LocacaoView(locacaoController);
             }
         });
 
@@ -79,11 +93,11 @@ public class MainView {
         gbc.gridx = 0;
         gbc.gridy = 2;
         buttonPanel.add(openVeiculoButton, gbc);
-        
+
         gbc.gridx = 0;
         gbc.gridy = 3;
         buttonPanel.add(openDevolucaoButton, gbc);
-        
+
         gbc.gridx = 0;
         gbc.gridy = 4;
         buttonPanel.add(openVenderButton, gbc);

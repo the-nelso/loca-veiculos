@@ -9,6 +9,7 @@ import model.veiculo.estado.Estado;
 import model.veiculo.marca.Marca;
 
 public abstract class Veiculo implements VeiculoI{
+	protected Long id;
 	protected Estado estado;
 	protected Marca marca;
 	protected Locacao locacao;
@@ -27,9 +28,12 @@ public abstract class Veiculo implements VeiculoI{
 		this.ano = ano;
 	}
 	
+	public Veiculo() {
+	}
+	
 	@Override
-	public void locar(int dias, Calendar data, Cliente cliente) {
-		Locacao locacao = new Locacao(dias, getValorDiariaLocacao(), data, cliente, this);
+	public void locar(Long id, int dias, Calendar data, Cliente cliente) {
+		Locacao locacao = new Locacao(id, dias, getValorDiariaLocacao(), data, cliente, this);
 		this.estado = Estado.LOCADO;
 		this.locacao = locacao;
 	}
@@ -84,6 +88,46 @@ public abstract class Veiculo implements VeiculoI{
 	@Override
 	public int getAno() {
 		return ano;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public double getValorCompra() {
+		return valorCompra;
+	}
+
+	public void setValorCompra(double valorCompra) {
+		this.valorCompra = valorCompra;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	public void setLocacao(Locacao locacao) {
+		this.locacao = locacao;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
 	}
 	
 	
