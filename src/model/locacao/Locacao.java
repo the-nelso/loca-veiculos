@@ -11,6 +11,7 @@ public class Locacao {
 	private Calendar data;
 	private Cliente cliente;
 	private Veiculo veiculo;
+	private Long id;
 	
 	public Locacao(int dias, double valor, Calendar data, Cliente cliente, Veiculo veiculo) {
 		this.cliente = cliente;
@@ -42,4 +43,31 @@ public class Locacao {
 		return veiculo;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setDias(int dias) {
+		this.dias = dias;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	public void setData(Calendar data) {
+		this.data = data;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
 }

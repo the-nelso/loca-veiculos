@@ -15,6 +15,9 @@ public class Van extends Veiculo{
 		this.modeloVan = modeloVan;
 	}
 
+	public Van() {
+	}
+
 	@Override
 	public double getValorDiariaLocacao() {
 		if(this.categoria.equals(Categoria.POPULAR)) {
@@ -42,4 +45,9 @@ public class Van extends Veiculo{
 	public String getTipo() {
 		return "Van";
 	}
+
+	public void setModeloVan(ModeloVan modeloVan) {
+		this.modeloVan = modeloVan;
+	}
+	
 }

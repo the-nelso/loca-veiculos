@@ -28,6 +28,9 @@ public abstract class Veiculo implements VeiculoI{
 		this.ano = ano;
 	}
 	
+	public Veiculo() {
+	}
+	
 	@Override
 	public void locar(int dias, Calendar data, Cliente cliente) {
 		Locacao locacao = new Locacao(dias, getValorDiariaLocacao(), data, cliente, this);
@@ -94,5 +97,38 @@ public abstract class Veiculo implements VeiculoI{
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public double getValorCompra() {
+		return valorCompra;
+	}
+
+	public void setValorCompra(double valorCompra) {
+		this.valorCompra = valorCompra;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	public void setLocacao(Locacao locacao) {
+		this.locacao = locacao;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+	
 	
 }

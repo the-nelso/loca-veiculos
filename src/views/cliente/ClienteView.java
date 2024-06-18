@@ -1,35 +1,38 @@
 package views.cliente;
 
-import javax.swing.*;
-
-import controller.Dados;
-
-import java.util.List;
-
-import model.cliente.Cliente;
-import model.locacao.Locacao;
-import model.table.ClienteTableModel;
-import model.veiculo.estado.Estado;
-
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+
+import controller.cliente.ClienteController;
+import model.cliente.Cliente;
+import model.table.ClienteTableModel;
 
 public class ClienteView extends JFrame {
 
     private ClienteTableModel tableModel;
-
     private JTextField cpfField;
     private JTextField rgField;
     private JTextField nomeField;
     private JTextField sobrenomeField;
     private JTextField enderecoField;
-    
-    private List<Cliente> listaClientes;
-    private List<Locacao> listaLocacao;
+    private ClienteController controller;
 
-    public ClienteView() {
+    public ClienteView(ClienteController controller) {
         super("Cadastro de Clientes");
+        this.controller = controller;
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(600, 300);
         setLocationRelativeTo(null);
@@ -43,11 +46,8 @@ public class ClienteView extends JFrame {
         nomeField = new JTextField(10);
         sobrenomeField = new JTextField(10);
         enderecoField = new JTextField(20);
-        listaClientes = Dados.getClientes();
-        
-        listaClientes = Dados.getClientes();
-        listaLocacao = Dados.getLocacoes();
-        tableModel.setClientes(listaClientes);
+
+        tableModel.setClientes(controller.obterListaClientes());
 
         JButton addButton = new JButton("Adicionar");
         JButton editButton = new JButton("Editar");
@@ -91,7 +91,6 @@ public class ClienteView extends JFrame {
         inputPanel.add(new JLabel("Endereço:"));
         inputPanel.add(enderecoField);
 
-
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(toolBar, BorderLayout.NORTH);
         mainPanel.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -105,9 +104,8 @@ public class ClienteView extends JFrame {
         Cliente cliente = dialog.showDialog();
 
         if (cliente != null) {
-            listaClientes.add(cliente);
-
-            tableModel.setClientes(listaClientes);
+            controller.adicionarCliente(cliente);
+            tableModel.setClientes(controller.obterListaClientes());
             tableModel.fireTableDataChanged();
         }
     }
@@ -119,9 +117,9 @@ public class ClienteView extends JFrame {
             Cliente clienteAtualizado = dialog.showDialog();
 
             if (clienteAtualizado != null) {
-                listaClientes.set(selectedRow, clienteAtualizado);
-
-                tableModel.setClientes(listaClientes);
+                clienteAtualizado.setId(cliente.getId());  // Manter o ID do cliente original
+                controller.atualizarCliente(clienteAtualizado);
+                tableModel.setClientes(controller.obterListaClientes());
                 tableModel.fireTableDataChanged();
             }
         } else {
@@ -131,28 +129,12 @@ public class ClienteView extends JFrame {
 
     private void excluirCliente(int selectedRow) {
         if (selectedRow != -1) {
-        	Cliente clienteRemovido = tableModel.getClienteAt(selectedRow);
-        	for(Locacao locacao : listaLocacao) {
-        		if(locacao.getCliente().equals(clienteRemovido) && locacao.getVeiculo().getEstado() == Estado.LOCADO) {
-        			JOptionPane.showMessageDialog(this, "O Cliente não pode ser removido pois possui pelo menos uma locação.", "Erro", JOptionPane.ERROR_MESSAGE);
-        			return;
-        		}
-        	}
-        	listaClientes.remove(clienteRemovido);
-
-            tableModel.setClientes(listaClientes);
+            Cliente cliente = tableModel.getClienteAt(selectedRow);
+            controller.excluirCliente(cliente);
+            tableModel.setClientes(controller.obterListaClientes());
             tableModel.fireTableDataChanged();
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um cliente para excluir.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ClienteView();
-            }
-        });
     }
 }

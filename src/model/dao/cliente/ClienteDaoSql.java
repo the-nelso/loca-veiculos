@@ -23,7 +23,7 @@ public class ClienteDaoSql implements ClienteDao {
 
 	private static ClienteDaoSql dao;
 
-	public static ClienteDaoSql getContatoDaoSql() {
+	public static ClienteDaoSql getClienteDaoSql() {
 		if (dao == null)
 			return dao = new ClienteDaoSql();
 		else
