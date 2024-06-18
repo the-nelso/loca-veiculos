@@ -32,8 +32,8 @@ public abstract class Veiculo implements VeiculoI{
 	}
 	
 	@Override
-	public void locar(int dias, Calendar data, Cliente cliente) {
-		Locacao locacao = new Locacao(dias, getValorDiariaLocacao(), data, cliente, this);
+	public void locar(Long id, int dias, Calendar data, Cliente cliente) {
+		Locacao locacao = new Locacao(id, dias, getValorDiariaLocacao(), data, cliente, this);
 		this.estado = Estado.LOCADO;
 		this.locacao = locacao;
 	}

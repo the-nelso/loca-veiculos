@@ -6,15 +6,16 @@ import model.cliente.Cliente;
 import model.veiculo.Veiculo;
 
 public class Locacao {
+	private Long id;
 	private int dias;
 	private double valor;
 	private Calendar data;
 	private Cliente cliente;
 	private Veiculo veiculo;
-	private Long id;
 	
-	public Locacao(int dias, double valor, Calendar data, Cliente cliente, Veiculo veiculo) {
+	public Locacao(Long id, int dias, double valor, Calendar data, Cliente cliente, Veiculo veiculo) {
 		this.cliente = cliente;
+		this.id = id;
 		this.dias = dias;
 		this.valor = valor;
 		this.data = data;

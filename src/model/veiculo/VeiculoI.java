@@ -9,7 +9,7 @@ import model.veiculo.estado.Estado;
 import model.veiculo.marca.Marca;
 
 public interface VeiculoI {
-	 public void locar(int dias, Calendar data, Cliente cliente);
+	 public void locar(Long id, int dias, Calendar data, Cliente cliente);
 	 public void vender();
 	 public void devolver();
 	 public Estado getEstado();
