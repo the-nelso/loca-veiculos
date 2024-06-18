@@ -12,16 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import controller.DevolucaoController;
 import controller.LocacaoController;
-import controller.VendaVeiculoController;
 import controller.cliente.ClienteController;
 import controller.veiculo.VeiculoController;
 import views.cliente.ClienteView;
-import views.devolucao.DevolucaoView;
-import views.locacao.LocacaoView;
 import views.veiculo.VeiculoView;
-import views.veiculo.VendaVeiculoView;
 
 public class MainView {
     public static void main(String[] args) {
@@ -45,20 +40,20 @@ public class MainView {
         ClienteController clienteController = new ClienteController();
         LocacaoController locacaoController = new LocacaoController();
         VeiculoController veiculoController = new VeiculoController();
-        DevolucaoController devolucaoController = new DevolucaoController();
-        VendaVeiculoController vendaVeiculoController = new VendaVeiculoController();
+        // DevolucaoController devolucaoController = new DevolucaoController();
+        // VendaVeiculoController vendaVeiculoController = new VendaVeiculoController();
 
         openVenderButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new VendaVeiculoView(vendaVeiculoController);
+                // new VendaVeiculoView(vendaVeiculoController);
             }
         });
 
         openDevolucaoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new DevolucaoView(devolucaoController);
+                // new DevolucaoView(devolucaoController);
             }
         });
 
@@ -79,7 +74,7 @@ public class MainView {
         openLocacaoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new LocacaoView(locacaoController);
+                // new LocacaoView(locacaoController);
             }
         });
 
