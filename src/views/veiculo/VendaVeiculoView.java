@@ -28,7 +28,7 @@ public class VendaVeiculoView extends JFrame {
 	 */
 	private static final long serialVersionUID = -1623522177289908752L;
 	private JComboBox<String> tipoVeiculoComboBox;
-    private JComboBox<Marca> marcaComboBox;
+    private JComboBox<String> marcaComboBox;
     private JComboBox<String> categoriaComboBox;
     private JTable veiculosTable;
     private VeiculoTableModel veiculoTableModel;
@@ -45,9 +45,14 @@ public class VendaVeiculoView extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        tipoVeiculoComboBox = new JComboBox<>(new String[]{"Automovel", "Van", "Motocicleta"});
-        marcaComboBox = new JComboBox<>(Marca.values());
-        categoriaComboBox = new JComboBox<>(new String[]{"POPULAR", "INTERMEDIARIO", "LUXO"});
+        tipoVeiculoComboBox = new JComboBox<>(new String[]{"","Automovel", "Van", "Motocicleta"});
+        marcaComboBox = new JComboBox<>();
+        marcaComboBox.addItem("");
+        for (Marca marca : Marca.values()) {
+            marcaComboBox.addItem(marca.name());
+        }
+
+        categoriaComboBox = new JComboBox<>(new String[]{"","POPULAR", "INTERMEDIARIO", "LUXO"});
         veiculosTable = new JTable();
         veiculoTableModel = new VeiculoTableModel();
         listaVeiculos = vendaVeiculoController.getVeiculosDisponiveis();
