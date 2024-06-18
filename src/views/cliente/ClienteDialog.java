@@ -2,7 +2,7 @@ package views.cliente;
 
 import javax.swing.*;
 
-import control.Dados;
+import controller.Dados;
 import model.cliente.Cliente;
 
 import java.awt.*;
@@ -92,7 +92,7 @@ public class ClienteDialog extends JDialog {
 
         if (!cpf.isEmpty() && !rg.isEmpty() && !nome.isEmpty() && !sobrenome.isEmpty() && !endereco.isEmpty()) {
             if (cliente == null) {
-                cliente = new Cliente(cpf, rg, nome, sobrenome, endereco);
+                cliente = new Cliente(cpf, rg, nome, sobrenome, endereco, -1L);
             } else {
                 cliente.setCpf(cpf);
                 cliente.setRg(rg);

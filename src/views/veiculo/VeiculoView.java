@@ -3,7 +3,7 @@ package views.veiculo;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
-import control.Dados;
+import controller.Dados;
 import model.veiculo.Veiculo;
 import model.veiculo.automovel.Automovel;
 import model.veiculo.automovel.modelo.ModeloAutomovel;
@@ -23,6 +23,10 @@ import java.util.List;
 
 public class VeiculoView extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1250027968214508596L;
 	private JComboBox<String> tipoComboBox;
     private JComboBox<Marca> marcaComboBox;
     private JComboBox<Estado> estadoComboBox;

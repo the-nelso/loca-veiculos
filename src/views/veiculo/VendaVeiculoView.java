@@ -7,7 +7,7 @@ import model.veiculo.marca.Marca;
 
 import javax.swing.*;
 
-import control.Dados;
+import controller.Dados;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,7 +17,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class VendaVeiculoView extends JFrame {
-    private JComboBox<String> tipoVeiculoComboBox;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1623522177289908752L;
+	private JComboBox<String> tipoVeiculoComboBox;
     private JComboBox<Marca> marcaComboBox;
     private JComboBox<String> categoriaComboBox;
     private JTable veiculosTable;

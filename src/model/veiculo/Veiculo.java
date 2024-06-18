@@ -9,6 +9,7 @@ import model.veiculo.estado.Estado;
 import model.veiculo.marca.Marca;
 
 public abstract class Veiculo implements VeiculoI{
+	protected Long id;
 	protected Estado estado;
 	protected Marca marca;
 	protected Locacao locacao;
@@ -85,6 +86,13 @@ public abstract class Veiculo implements VeiculoI{
 	public int getAno() {
 		return ano;
 	}
-	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }

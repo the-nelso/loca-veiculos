@@ -2,7 +2,7 @@ package views.cliente;
 
 import javax.swing.*;
 
-import control.Dados;
+import controller.Dados;
 
 import java.util.List;
 

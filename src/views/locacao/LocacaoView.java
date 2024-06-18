@@ -2,7 +2,7 @@ package views.locacao;
 
 import javax.swing.*;
 
-import control.Dados;
+import controller.Dados;
 import model.cliente.Cliente;
 import model.locacao.Locacao;
 import model.table.VeiculoTableModel;

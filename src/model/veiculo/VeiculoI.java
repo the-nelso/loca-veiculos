@@ -20,4 +20,6 @@ public interface VeiculoI {
 	 public int getAno();
 	 public double getValorParaVenda();
 	 public double getValorDiariaLocacao();
+	 public Long getId();
+	 public void setId(Long id);
 	}
