@@ -1,7 +1,8 @@
 package model.dao;
 
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,11 +23,16 @@ public class ConnectionFactory {
 	}
 
 	private static void readProperties() throws IOException {
-		if (properties == null) {
-			Properties props = new Properties();
-			FileInputStream file = new FileInputStream("./src/model/dao/application.properties");
-			props.load(file);
-			properties = props;
-		}
+	    if (properties == null) {
+	        Properties props = new Properties();
+	        // Carrega o arquivo como um recurso dentro do JAR
+	        InputStream inputStream = ConnectionFactory.class.getClassLoader().getResourceAsStream("model/dao/application.properties");
+	        if (inputStream == null) {
+	            throw new FileNotFoundException("Arquivo application.properties não encontrado.");
+	        }
+	        props.load(inputStream);
+	        properties = props;
+	    }
 	}
+
 }

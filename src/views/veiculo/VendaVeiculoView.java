@@ -1,20 +1,26 @@
 package views.veiculo;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import controller.veiculo.VendaVeiculoController;
 import model.table.VeiculoTableModel;
 import model.veiculo.Veiculo;
 import model.veiculo.estado.Estado;
 import model.veiculo.marca.Marca;
-
-import javax.swing.*;
-
-import controller.Dados;
-
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class VendaVeiculoView extends JFrame {
     /**
@@ -28,8 +34,12 @@ public class VendaVeiculoView extends JFrame {
     private VeiculoTableModel veiculoTableModel;
 
     private List<Veiculo> listaVeiculos;
-
-    public VendaVeiculoView() {
+    
+    private VendaVeiculoController vendaVeiculoController;
+    
+    public VendaVeiculoView(VendaVeiculoController vendaVeiculoController) {
+    	this.vendaVeiculoController = vendaVeiculoController;
+    	
         setTitle("Venda de Veículos");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -40,7 +50,7 @@ public class VendaVeiculoView extends JFrame {
         categoriaComboBox = new JComboBox<>(new String[]{"POPULAR", "INTERMEDIARIO", "LUXO"});
         veiculosTable = new JTable();
         veiculoTableModel = new VeiculoTableModel();
-        listaVeiculos = Dados.getVeiculos();
+        listaVeiculos = vendaVeiculoController.getVeiculosDisponiveis();
 
         JPanel filtroPanel = new JPanel(new FlowLayout());
         filtroPanel.add(new JLabel("Tipo Veículo:"));
@@ -96,9 +106,10 @@ public class VendaVeiculoView extends JFrame {
         int selectedRow = veiculosTable.getSelectedRow();
         if (selectedRow >= 0) {
             Veiculo veiculoSelecionado = veiculoTableModel.getVeiculo(selectedRow);
-
             veiculoSelecionado.vender();
-
+            
+            vendaVeiculoController.venderVeiculo(veiculoSelecionado);
+            
             updateTable();
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um veículo para vender.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -106,7 +117,7 @@ public class VendaVeiculoView extends JFrame {
     }
 
     private void updateTable() {
-        listaVeiculos = Dados.getVeiculos();
+        listaVeiculos = vendaVeiculoController.getVeiculosDisponiveis();
 
         String categoriaSelecionada = categoriaComboBox.getSelectedItem().toString();
         String marcaSelecionada = marcaComboBox.getSelectedItem().toString();
@@ -121,15 +132,5 @@ public class VendaVeiculoView extends JFrame {
 
         veiculoTableModel.setVeiculos(veiculosDisponiveis);
         veiculosTable.setModel(veiculoTableModel);
-    }
-
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VendaVeiculoView();
-            }
-        });
     }
 }

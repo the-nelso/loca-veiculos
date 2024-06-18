@@ -13,10 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 import javax.swing.text.MaskFormatter;
 
-import controller.Dados;
 import controller.veiculo.VeiculoController;
 import model.veiculo.Veiculo;
 import model.veiculo.automovel.Automovel;
@@ -53,7 +51,7 @@ public class VeiculoView extends JFrame {
         setSize(400, 300);
         setLocationRelativeTo(null);
         
-        listaVeiculos = Dados.getVeiculos();
+        listaVeiculos = controller.listarVeiculos();
         tipoComboBox = new JComboBox<>();
         tipoComboBox.addItem("Automovel");
         tipoComboBox.addItem("Motocicleta");
