@@ -93,6 +93,7 @@ public class VeiculoDaoSql implements VeiculoDao {
         return veiculos;
     }
     
+    @Override
     public List<Veiculo> getLocados() throws Exception {
         List<Veiculo> veiculos = new ArrayList<>();
         try (Connection connection = ConnectionFactory.getConnection();
@@ -107,6 +108,7 @@ public class VeiculoDaoSql implements VeiculoDao {
         return veiculos;
     }
     
+    @Override
     public List<Veiculo> getDisponiveis() throws Exception {
         List<Veiculo> veiculos = new ArrayList<>();
         try (Connection connection = ConnectionFactory.getConnection();
